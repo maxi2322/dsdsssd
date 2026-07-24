@@ -126,6 +126,23 @@ Beispiel für einen ersten Testlauf ohne Risiko:
 python -m receipt_sorter --input ./belege --output ./sortiert-test --dry-run --log-level DEBUG
 ```
 
+## Web-Oberfläche (im Browser, läuft lokal)
+
+Statt der Kommandozeile gibt es eine einfache Browser-Oberfläche mit
+Drag-&-Drop-Upload (für wenige Belege) oder Ordnerpfad (für viele Belege),
+Fortschrittsbalken, Ergebnistabelle und Excel-Download-Button:
+
+```bash
+streamlit run app.py
+```
+
+Öffnet automatisch `http://localhost:8501` im Browser. **Wichtig:** Die
+Anwendung läuft weiterhin ausschließlich auf diesem Rechner (kein
+öffentlicher Server) – Belege verlassen deinen PC nicht, außer bei
+aktivierter KI-Kategorisierung, wo Händler/Betrag/Textauszug an die
+gewählte LLM-API gesendet werden. Der API-Key kann entweder aus `.env`
+kommen oder einmalig im Feld "API-Key" in der Seitenleiste eingegeben werden.
+
 ## Ergebnis
 
 ```
