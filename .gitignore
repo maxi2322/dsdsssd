@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+config.yaml
+
+# Typische lokale Ein-/Ausgabeordner - nicht Teil des Repos
+/belege/
+/sortiert/
+*.xlsx
+!config.example.yaml

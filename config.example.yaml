@@ -1,0 +1,51 @@
+# Kopiere diese Datei nach config.yaml und passe sie an.
+# Aufruf dann mit: python -m receipt_sorter --input ./belege --output ./sortiert --config config.yaml
+
+# Buchhaltungskategorien, in die Belege einsortiert werden.
+categories:
+  - Reisekosten
+  - Bewirtung
+  - Büromaterial
+  - Fahrzeugkosten
+  - Miete
+  - Telekommunikation
+  - Versicherung
+  - Marketing und Werbung
+  - Fortbildung
+  - Sonstiges
+
+# Schnelle, kostenlose Vorab-Zuordnung per Stichwort im Händlernamen (klein geschrieben).
+# Nur wenn keine Regel passt, wird (falls aktiviert) das Sprachmodell befragt.
+# Eigene Einträge ergänzen oder überschreiben die Standardregeln vollständig, wenn gesetzt.
+rules:
+  tankstelle: Fahrzeugkosten
+  shell: Fahrzeugkosten
+  restaurant: Bewirtung
+  bahn: Reisekosten
+  hotel: Reisekosten
+  telekom: Telekommunikation
+  versicherung: Versicherung
+  hausverwaltung: Miete
+
+llm:
+  # "anthropic", "openai" oder "none" (nur regelbasiert kategorisieren)
+  provider: anthropic
+  model: claude-haiku-4-5-20251001
+  # Name der Umgebungsvariable, die den API-Key enthält (siehe .env.example)
+  api_key_env: ANTHROPIC_API_KEY
+  max_retries: 3
+  timeout_seconds: 30
+  enabled: true
+
+ocr:
+  # Pfad zur tesseract.exe, falls nicht im PATH (z.B. unter Windows). Sonst null lassen.
+  tesseract_cmd: null
+  lang: deu+eng
+  dpi: 300
+  # Ab wie vielen Zeichen eingebetteter PDF-Text als "vorhanden" gilt (sonst wird OCR verwendet).
+  min_embedded_text_length: 20
+
+processing:
+  workers: 4
+  manual_review_dirname: _Manuelle_Pruefung
+  log_dirname: _Verarbeitungsprotokoll
