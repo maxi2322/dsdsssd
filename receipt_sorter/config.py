@@ -70,6 +70,7 @@ class LLMConfig:
 @dataclass
 class OCRConfig:
     tesseract_cmd: Optional[str] = None
+    poppler_path: Optional[str] = None
     lang: str = "deu+eng"
     dpi: int = 300
     min_embedded_text_length: int = 20
@@ -120,6 +121,7 @@ class AppConfig:
         ocr_data = data.get("ocr") or {}
         cfg.ocr = OCRConfig(
             tesseract_cmd=ocr_data.get("tesseract_cmd", cfg.ocr.tesseract_cmd),
+            poppler_path=ocr_data.get("poppler_path", cfg.ocr.poppler_path),
             lang=ocr_data.get("lang", cfg.ocr.lang),
             dpi=int(ocr_data.get("dpi", cfg.ocr.dpi)),
             min_embedded_text_length=int(

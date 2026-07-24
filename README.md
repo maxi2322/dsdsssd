@@ -35,8 +35,47 @@ sudo apt-get install tesseract-ocr tesseract-ocr-deu poppler-utils
 brew install tesseract tesseract-lang poppler
 ```
 
-Unter Windows: Tesseract- und Poppler-Installer herunterladen und den Pfad in
-`config.yaml` unter `ocr.tesseract_cmd` bzw. im `PATH` hinterlegen.
+### Windows-Setup
+
+1. **Python** installieren: von [python.org](https://www.python.org/downloads/windows/)
+   herunterladen. Beim Installer unbedingt **"Add python.exe to PATH"** anhaken.
+2. **Tesseract OCR** installieren: Installer von der
+   [UB-Mannheim-Seite](https://github.com/UB-Mannheim/tesseract/wiki) laden
+   (z. B. `tesseract-ocr-w64-setup-5.x.x.exe`). Beim Installieren das
+   **deutsche Sprachpaket** mit auswählen. Standardmäßig landet die
+   `tesseract.exe` unter `C:\Program Files\Tesseract-OCR\tesseract.exe`.
+3. **Poppler für Windows** installieren: fertiges Build von
+   [github.com/oschwartz10612/poppler-windows/releases](https://github.com/oschwartz10612/poppler-windows/releases)
+   herunterladen und z. B. nach `C:\poppler` entpacken. Der `bin`-Ordner
+   (enthält `pdftoppm.exe`) liegt dann z. B. unter `C:\poppler\Library\bin`.
+4. In `config.yaml` die beiden Pfade eintragen, damit sie nicht extra zum
+   `PATH` hinzugefügt werden müssen:
+
+   ```yaml
+   ocr:
+     tesseract_cmd: 'C:\Program Files\Tesseract-OCR\tesseract.exe'
+     poppler_path: 'C:\poppler\Library\bin'
+   ```
+
+5. In **PowerShell** oder **CMD** (statt Bash) die folgenden Befehle nutzen:
+
+   ```powershell
+   py -m venv .venv
+   .venv\Scripts\activate
+   pip install -r requirements.txt
+   copy .env.example .env
+   copy config.example.yaml config.yaml
+   ```
+
+   Danach `.env` und `config.yaml` im Editor öffnen und anpassen (API-Key,
+   `tesseract_cmd`, `poppler_path`). Aufruf dann wie gewohnt:
+
+   ```powershell
+   python -m receipt_sorter --input .\belege --output .\sortiert --config config.yaml --dry-run --no-llm
+   ```
+
+   Pfade unter Windows in Anführungszeichen setzen, falls sie Leerzeichen
+   enthalten, z. B. `--input "C:\Users\Name\Meine Belege"`.
 
 ### Python-Abhängigkeiten
 

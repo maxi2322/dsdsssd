@@ -59,11 +59,13 @@ def _ocr_pdf(path: Path, ocr_config) -> str:
     _configure_tesseract(ocr_config.tesseract_cmd)
 
     try:
-        images = convert_from_path(str(path), dpi=ocr_config.dpi)
+        images = convert_from_path(
+            str(path), dpi=ocr_config.dpi, poppler_path=ocr_config.poppler_path
+        )
     except Exception as exc:
         raise OCRError(
             f"PDF konnte nicht in Bilder umgewandelt werden ({path.name}): {exc}. "
-            "Ist Poppler (pdftoppm) installiert?"
+            "Ist Poppler (pdftoppm) installiert bzw. ocr.poppler_path korrekt gesetzt?"
         ) from exc
 
     pages_text = []

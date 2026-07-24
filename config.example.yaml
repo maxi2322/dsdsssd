@@ -39,7 +39,11 @@ llm:
 
 ocr:
   # Pfad zur tesseract.exe, falls nicht im PATH (z.B. unter Windows). Sonst null lassen.
+  # Beispiel Windows: 'C:\Program Files\Tesseract-OCR\tesseract.exe'
   tesseract_cmd: null
+  # Pfad zum "bin"-Ordner von Poppler, falls nicht im PATH (z.B. unter Windows). Sonst null lassen.
+  # Beispiel Windows: 'C:\poppler\Library\bin'
+  poppler_path: null
   lang: deu+eng
   dpi: 300
   # Ab wie vielen Zeichen eingebetteter PDF-Text als "vorhanden" gilt (sonst wird OCR verwendet).
